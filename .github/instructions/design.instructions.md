@@ -9,7 +9,10 @@ Source of truth for look and flow. This file SUPERSEDES the "Design" section of 
 Approved canvases (Nolan's, view-only links):
 - App walkthrough (Learner, Facilitator, Admin): https://claude.ai/artifact/RXyqTsa6H7w21Ki8U4PJQc
 - Pilot cohort app (check-ins, outcomes, run sheets): https://claude.ai/artifact/NHR35NEZTbxEkWhmp3eV7t
-If screenshots or exported HTML are added under `docs/design/`, match them exactly.
+Exported source (19 Nov 2026), match exactly:
+- `docs/design/walkthrough/` — the five approved screens (Main = log in, Learner-Modules, Learner-Player, Facilitator, Admin) plus `canvas.json`. The `<x-dc>`, `{{ }}` and `DCLogic` parts are the canvas runtime, not app code.
+- `docs/design/pilot-app/` — the pilot app (`index.html`) and its content file `data.js`: all 24 modules with title, arc, DLO, method, materials, field work, prompts, debrief, self-debrief, summary questions, illustration, scene, and a `closing_draft` per module. Use `data.js` as the seed for Phase 5 content import. `closing_draft` is a compendium DRAFT and must never be shown to learners; only Nolan-authored Closing Laws are shown.
+- `public/images/modules/AAPEX_M01.png` … `AAPEX_M24.png` — the 24 module paintings (one per module, scene × phase light). Use on module tiles, the slide player hero and Almanac seals.
 
 ## Tokens (exact)
 
@@ -34,7 +37,7 @@ If screenshots or exported HTML are added under `docs/design/`, match them exact
 
 Type: Cinzel 700 (wordmark AAPEX, headings, module codes M01–M24), EB Garamond (italic bylines, module titles, prompts), Inter 400/500/600 (UI). Google Fonts.
 Radii: 12px buttons/inputs, 14px cards and tiles, 20px pills. Min touch target 44px (primary buttons 54px). Phone frame 390×844; Facilitator and Admin are fluid pages (desktop 1280).
-Byline: "by The Vantage by Langford" (the canvas still offers "The Long Ford"; that name is retired).
+Byline under the AAPEX wordmark: "by The Vantage". "The Long Ford" is retired and must not appear anywhere.
 Icons: inline stroke SVG; no emoji.
 
 ## Roles and the View menu
