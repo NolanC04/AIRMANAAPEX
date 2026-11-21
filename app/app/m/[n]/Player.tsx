@@ -5,6 +5,7 @@ import { postJSON } from "@/lib/fetchWithRetry";
 import type { Slide } from "@/lib/slides";
 import type { ModuleContent } from "@/lib/program";
 import { CRISIS } from "@/lib/privacy";
+import { Painting } from "@/components/Painting";
 
 type Entry = { bridge: string | null; bridge_at: string | null; remix: string | null; quick_check: number | null; gene: { q: string; a: string | null }[]; sealed_at: string | null; shared: boolean };
 
@@ -27,7 +28,7 @@ function useAction() {
   return { busy, err, run };
 }
 
-export function Player(props: { n: number; code: string; image: string; phase: string; session: number; slides: Slide[]; content: ModuleContent; entry: Entry; closingLaw: string | null }) {
+export function Player(props: { n: number; code: string; image: string | null; phase: string; session: number; slides: Slide[]; content: ModuleContent; entry: Entry; closingLaw: string | null }) {
   const { n, slides, content, entry } = props;
   const [i, setI] = useState(entry.bridge_at && slides.length > 8 ? 8 : 0);
   const s = slides[i];
@@ -45,7 +46,7 @@ export function Player(props: { n: number; code: string; image: string; phase: s
   const sealed = Boolean(entry.sealed_at);
 
   return (
-    <main className="page" style={{ display: "grid", gap: 12 }}>
+    <main className="page" style={{ display: "grid", gap: 12, gridTemplateColumns: "minmax(0, 1fr)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Link href="/app" className="help">‹ Modules</Link>
         <span className="k">{props.code} · {props.phase} · P{props.session}</span>
@@ -62,9 +63,8 @@ export function Player(props: { n: number; code: string; image: string; phase: s
         }}
         style={{ position: "relative", borderRadius: 14, overflow: "hidden", aspectRatio: "4 / 5", background: "var(--color-primary)", color: "var(--color-on-primary)" }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={props.image} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: s.n <= 2 ? 0.85 : 0.25 }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(20,20,19,.2), rgba(20,20,19,.75))" }} />
+        {props.image && <Painting src={props.image} variant="hero" dim={s.n > 2} />}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(20,20,19,0) 45%, rgba(20,20,19,.85) 100%)" }} />
         <div style={{ position: "absolute", left: 18, right: 18, bottom: 18 }}>
           <div className="k" style={{ color: "rgba(247,242,232,.8)" }}>{s.screen} · {s.n}/{total}</div>
           <h2 style={{ color: "var(--color-on-primary)", fontSize: 24, margin: "6px 0 8px" }}>{s.heading}</h2>
@@ -74,7 +74,7 @@ export function Player(props: { n: number; code: string; image: string; phase: s
       </section>
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
         <button className="btn-ghost" onClick={() => go(-1)} disabled={i === 0} aria-label="Previous slide">‹</button>
-        <div role="tablist" aria-label="Slides" style={{ display: "flex", gap: 4, overflowX: "auto", flex: 1 }}>
+        <div role="tablist" aria-label="Slides" style={{ display: "flex", gap: 4, overflowX: "auto", flex: 1, minWidth: 0 }}>
           {Array.from({ length: total }, (_, k) => {
             const sl = slides[k];
             const locked = !sl;

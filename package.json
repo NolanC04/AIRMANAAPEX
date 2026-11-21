@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "seed:admin": "node scripts/seed-admin.mjs",
-    "bundle:pilot": "node scripts/pilot-bundle.mjs"
+    "bundle:pilot": "node scripts/pilot-bundle.mjs",
+    "check:images": "node scripts/module-images.mjs --check",
+    "prebuild": "npm run check:images",
+    "seed:images": "node scripts/module-images.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

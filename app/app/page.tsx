@@ -2,7 +2,8 @@ import Link from "next/link";
 import { currentProfile } from "@/lib/auth";
 import { modules, entriesOf, openSessions, settings } from "@/lib/data";
 import { store } from "@/lib/store";
-import { PHASES, code, image, sessionOf, gap } from "@/lib/program";
+import { PHASES, code, sessionOf, gap } from "@/lib/program";
+import { Painting } from "@/components/Painting";
 import type { Join } from "@/lib/access";
 import { DailyRep } from "./DailyRep";
 import { Reviews } from "./Reviews";
@@ -59,8 +60,7 @@ export default async function Modules({ searchParams }: { searchParams: Promise<
           const state = sealed.has(m.number) ? "SEALED" : tonight.has(m.number) ? "TONIGHT" : open ? "OPEN" : "LOCKED";
           const inner = (
             <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              {open && <img src={image(m.number)} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0.55 }} />}
+              {open && m.image_url && <Painting src={m.image_url} variant="tile" />}
               <span style={{ position: "relative", display: "flex", justifyContent: "space-between", padding: 12 }}>
                 <span style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>{code(m.number)}</span>
                 <span className="pill" style={open ? { background: "rgba(247,242,232,.9)", color: "var(--color-primary)" } : undefined}>{state}</span>

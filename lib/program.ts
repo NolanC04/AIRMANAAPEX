@@ -10,7 +10,6 @@ export const sessionOf = (n: number) => ((n - 1) % 8) + 1;
 export const trio = (k: number) => [k, k + 8, k + 16];
 export const SCENES = ["Well", "Aqueduct", "Stained glass", "Bridge", "Ship", "Hearth", "Scriptorium", "Temple"];
 export const code = (n: number) => `M${String(n).padStart(2, "0")}`;
-export const image = (n: number) => `/images/modules/AAPEX_M${String(n).padStart(2, "0")}.png`;
 export const FIVE_CS = ["Character", "Competence", "Capability", "Cohesion", "Capacity"] as const;
 
 /** The default 13-slide module map (approved design). Admin can edit per module. */
@@ -64,6 +63,7 @@ export interface ModuleRow {
   phase: PhaseKey;
   session: number;
   content: ModuleContent;
+  image_url: string | null; // seeded from docs/design/pilot-app/data.js (scripts/module-images.mjs)
   version: number;
   status: "draft" | "published";
   closing_law_id: string | null;

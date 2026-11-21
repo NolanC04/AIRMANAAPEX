@@ -1,4 +1,5 @@
 import { PHASES, phaseOf, sessionOf } from "./program";
+import images from "./module-images.json";
 
 const NOW = "2026-11-20T00:00:00.000Z";
 // Phase 5 seed: numbers, phases and session mapping only. Content arrives through the import flow.
@@ -33,6 +34,7 @@ export function seedData() {
       phase: phaseOf(i + 1).key,
       session: sessionOf(i + 1),
       content: {},
+      image_url: (images as Record<string, string>)[String(i + 1)] ?? null,
       version: 0,
       status: "draft",
       closing_law_id: null,

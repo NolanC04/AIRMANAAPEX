@@ -94,3 +94,19 @@ test("AAPEX materials never mention The Vantage; 'advantage' still passes", () =
   assert.equal(mentionsVantage({ title: "Unique Value", dlo: "competitive advantage" }), false);
   assert.equal(mentionsVantage({ learn_md: "a Vantage program" }), true);
 });
+
+import { existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import images from "../lib/module-images.json" with { type: "json" };
+import { seedData } from "../lib/seed.ts";
+test("module paintings: all 24 seeded from data.js and present on disk", () => {
+  const map = images as Record<string, string>;
+  for (let n = 1; n <= 24; n++) {
+    const url = map[String(n)];
+    assert.equal(url, `/images/modules/AAPEX_M${String(n).padStart(2, "0")}.png`);
+    assert.ok(existsSync(`public${url}`), `public${url} missing`);
+  }
+  assert.deepEqual(seedData().modules.map((m) => m.image_url), Array.from({ length: 24 }, (_, i) => map[String(i + 1)]));
+  // the generated map must match data.js today (re-run `npm run seed:images` if data.js changes)
+  assert.doesNotThrow(() => execFileSync(process.execPath, ["scripts/module-images.mjs", "--check"]));
+});

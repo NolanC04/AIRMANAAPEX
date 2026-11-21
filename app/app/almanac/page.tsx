@@ -1,7 +1,8 @@
 import { currentProfile } from "@/lib/auth";
 import { entriesOf, modules } from "@/lib/data";
 import { reflectionFor } from "@/lib/reflection";
-import { PHASES, code, image, phaseOf } from "@/lib/program";
+import { PHASES, code, phaseOf } from "@/lib/program";
+import { Painting } from "@/components/Painting";
 import { AlmanacTools, ShareToggle, Reflection } from "./Tools";
 
 export default async function Almanac() {
@@ -9,6 +10,7 @@ export default async function Almanac() {
   const [entries, mods, reflection] = await Promise.all([entriesOf(p.id), modules(), reflectionFor(p.id)]);
   const sealed = entries.filter((e) => e.sealed_at);
   const title = (n: number) => mods.find((m) => m.number === n)?.content.title ?? code(n);
+  const painting = (n: number) => mods.find((m) => m.number === n)?.image_url ?? null;
   return (
     <main className="page" style={{ display: "grid", gap: 14 }}>
       <h1 style={{ fontSize: 22, margin: "8px 0 0" }}>Your Almanac</h1>
@@ -23,8 +25,7 @@ export default async function Almanac() {
             {list.map((e) => (
               <article key={e.id} className="card" style={{ display: "grid", gap: 8 }}>
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={image(e.module_number)} alt="" width={56} height={56} style={{ borderRadius: 10, objectFit: "cover" }} />
+                  <Painting src={painting(e.module_number)} variant="seal" emblem={ph.emblem} />
                   <div><div className="k">{code(e.module_number)} · sealed {new Date(e.sealed_at!).toLocaleDateString()}</div><div className="serif" style={{ fontSize: 18 }}>{title(e.module_number)}</div></div>
                 </div>
                 <p style={{ margin: 0 }}><b>Bridge.</b> {e.bridge}</p>

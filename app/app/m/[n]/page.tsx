@@ -4,7 +4,7 @@ import { currentProfile } from "@/lib/auth";
 import { moduleRow, canRead, ensureEntry } from "@/lib/data";
 import { store } from "@/lib/store";
 import { buildSlides, visibleSlides } from "@/lib/slides";
-import { code, image, phaseOf, sessionOf, LEARNER_FIELDS, type ModuleContent } from "@/lib/program";
+import { code, phaseOf, sessionOf, LEARNER_FIELDS, type ModuleContent } from "@/lib/program";
 import { Player } from "./Player";
 
 export default async function ModulePage({ params }: { params: Promise<{ n: string }> }) {
@@ -30,7 +30,7 @@ export default async function ModulePage({ params }: { params: Promise<{ n: stri
     <Player
       n={n}
       code={code(n)}
-      image={image(n)}
+      image={m.image_url}
       phase={phaseOf(n).emblem}
       session={sessionOf(n)}
       slides={slides}
