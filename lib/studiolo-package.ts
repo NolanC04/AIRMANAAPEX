@@ -6,7 +6,7 @@ import { z } from "zod";
  * Headers:
  *   X-Studiolo-Timestamp: unix seconds
  *   X-Studiolo-Signature: sha256=<hex HMAC-SHA256 of `${timestamp}.${rawBody}` with APEX_IMPORT_SECRET>
- * Requests older than 5 minutes are rejected (replay guard). See docs/contracts/studiolo.vantage-1.md.
+ * Requests older than 5 minutes are rejected (replay guard). Contract shared with Studiolo: studiolo.apex/1.
  */
 export const FORMATS = [
   "book chapter", "workbook pages", "cohort lesson plan", "self-paced lesson", "talk outline", "slide outline",

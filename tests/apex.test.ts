@@ -88,3 +88,9 @@ test("import diff shows only changed fields and never deletes", () => {
   assert.deepEqual(diff({ title: "A", arc: "x" }, { title: "B" }), [{ field: "title", before: "A", after: "B" }]);
   assert.match(classCode(() => 0), /^[A-Z0-9]{6}$/);
 });
+
+import { mentionsVantage } from "../lib/brand.ts";
+test("AAPEX materials never mention The Vantage; 'advantage' still passes", () => {
+  assert.equal(mentionsVantage({ title: "Unique Value", dlo: "competitive advantage" }), false);
+  assert.equal(mentionsVantage({ learn_md: "a Vantage program" }), true);
+});

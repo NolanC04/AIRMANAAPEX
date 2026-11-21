@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "AAPEX · by The Vantage", template: "%s · AAPEX" },
+  title: { default: "AAPEX", template: "%s · AAPEX" },
   description: "The unit resiliency program app.",
   robots: { index: false },
 };

@@ -9,6 +9,7 @@ export const bad = (error: string, status = 400) => NextResponse.json({ error },
 export function fail(e: unknown) {
   if (e instanceof ConfigError) return bad(e.message, 503);
   if (e instanceof HttpError) return bad(e.message, e.status);
+  if (e instanceof Error && e.name === "ImportRejected") return bad(e.message, 422);
   console.error(e);
   return bad("Something on our side failed. Try again.", 500);
 }

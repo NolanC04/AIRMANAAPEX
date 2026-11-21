@@ -37,7 +37,7 @@ Exported source (19 Nov 2026), match exactly:
 
 Type: Cinzel 700 (wordmark AAPEX, headings, module codes M01–M24), EB Garamond (italic bylines, module titles, prompts), Inter 400/500/600 (UI). Google Fonts.
 Radii: 12px buttons/inputs, 14px cards and tiles, 20px pills. Min touch target 44px (primary buttons 54px). Phone frame 390×844; Facilitator and Admin are fluid pages (desktop 1280).
-Byline under the AAPEX wordmark: "by The Vantage". "The Long Ford" is retired and must not appear anywhere.
+No byline under the AAPEX wordmark. **AAPEX materials never mention The Vantage** (Nolan, 21 Nov 2026): not in the app, emails, exports, imported content or module art. The exported canvases and pilot app in `docs/design/` still carry Vantage bylines; do not port them. "The Long Ford" is retired and must not appear anywhere.
 Icons: inline stroke SVG; no emoji.
 
 ## Roles and the View menu

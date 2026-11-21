@@ -14,6 +14,7 @@ Read `.github/copilot-instructions.md`, then `.github/instructions/design.instru
 - Admin-judgment gate: imports become proposals with a diff; approval needs a checkbox and a click.
 - Loud failure: one silent retry, then a visible message with Retry.
 - Military Crisis Line (988 then 1, text 838255) in the footer and on request screens. Unofficial disclaimer everywhere. No USAF logos.
+- AAPEX materials never mention The Vantage: no byline, footer, email, export or module text. `lib/brand.ts` blocks it on import.
 - GENE's prompt is fetched from NolanC04/SIGNETOPS `cowork-prompts/gene.md`; never copy it here.
 
 ## Checks

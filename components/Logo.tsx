@@ -10,7 +10,6 @@ export function Wordmark({ small = false }: { small?: boolean }) {
   return (
     <div>
       <div className="wordmark" style={{ fontSize: small ? 18 : 34 }}>AAPEX</div>
-      <div className="byline" style={{ fontSize: small ? 12 : 16 }}>by The Vantage</div>
     </div>
   );
 }

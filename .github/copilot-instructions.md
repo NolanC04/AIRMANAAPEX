@@ -4,7 +4,7 @@ You are building Airman Apex for Nolan Langford, an active-duty Air Force Senior
 
 ## What Airman Apex is
 
-The MRT-facilitated program app for an Air Force unit. Offer line: "Hybrid intellects and hybrid athletes." It is the pilot program under The Vantage by Langford: military cohorts first. All Airman Apex materials later feed The Vantage (a separate repo and app). Context: First Term Airmen Center (FTAC) is being separated from the resiliency program, so MRTs are being pushed into units; this app is how resiliency gets organized and delivered inside the unit.
+The MRT-facilitated program app for an Air Force unit. Offer line: "Hybrid intellects and hybrid athletes." It is the pilot program, military cohorts first. Its results later feed a separate civilian app (a separate repo). **AAPEX materials never mention The Vantage** — no byline, footer, email, export or module text. Context: First Term Airmen Center (FTAC) is being separated from the resiliency program, so MRTs are being pushed into units; this app is how resiliency gets organized and delivered inside the unit.
 
 One app, two halves:
 
