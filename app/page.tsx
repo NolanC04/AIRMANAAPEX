@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { currentProfile, devAuth } from "@/lib/auth";
+import { currentProfile, devAuth, homeOf } from "@/lib/auth";
 import { Logo, Wordmark } from "@/components/Logo";
 import { Footer } from "@/components/Footer";
 import { SignIn } from "./SignIn";
@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Login({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const p = await currentProfile();
-  if (p) redirect(p.role === "admin" || p.role === "facilitator" ? "/facilitator" : "/app");
+  if (p) redirect(homeOf(p.role));
   const { error } = await searchParams;
   return (
     <>

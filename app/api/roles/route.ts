@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const p = await signedIn();
     if (!isAdmin(p)) throw new HttpError(403, "Only an admin changes access.");
     const { id, role } = await req.json();
-    if (!["learner", "assistant", "comparison", "facilitator", "admin"].includes(role)) throw new HttpError(400, "Unknown role.");
+    if (!["learner", "assistant", "comparison", "facilitator", "admin", "rater"].includes(role)) throw new HttpError(400, "Unknown role.");
     const target = await store().get<Profile>("profiles", { id });
     if (!target) throw new HttpError(404, "Not found.");
     if (target.email === env.adminEmail) throw new HttpError(403, "Nolan's own row is locked.");

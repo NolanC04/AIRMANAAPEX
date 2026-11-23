@@ -4,7 +4,7 @@ import type { Profile } from "./auth";
 import type { ModuleRow } from "./program";
 import { contentReadable, type ClassSession, type Join } from "./access";
 
-export interface Settings { id: string; modules_readable_after_completion: boolean; daily_reps_between_sessions: boolean; report_threshold: number }
+export interface Settings { id: string; modules_readable_after_completion: boolean; daily_reps_between_sessions: boolean; report_threshold: number; rater_review_enabled: boolean; gene_kappa_target: number | null }
 export interface Entry {
   id: string; user_id: string; module_number: number; bridge: string | null; bridge_at: string | null; remix: string | null;
   quick_check: number | null; gene: { q: string; a: string | null }[]; commitment_when: string | null; commitment_will: string | null;

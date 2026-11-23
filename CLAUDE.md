@@ -15,7 +15,8 @@ Read `.github/copilot-instructions.md`, then `.github/instructions/design.instru
 - Loud failure: one silent retry, then a visible message with Retry.
 - Military Crisis Line (988 then 1, text 838255) in the footer and on request screens. Unofficial disclaimer everywhere. No USAF logos.
 - AAPEX materials never mention The Vantage: no byline, footer, email, export or module text. `lib/brand.ts` blocks it on import.
-- GENE's prompt is fetched from NolanC04/SIGNETOPS `cowork-prompts/gene.md`; never copy it here.
+- GENE's prompt is fetched from NolanC04/SIGNETOPS `cowork-prompts/gene.md`; never copy it here. Pin it with `GENE_PROMPT_REF` (a commit SHA) for the pilot.
+- GENE validation: every GENE call files a `gene_reads` row (model, prompt hash, rubric version, tokens). Raters score first reads blind at `/rate`; they never see identity, GENE's grade, or another rater's grade. Agreement (quadratic weighted kappa) shows in Admin. GENE stays experimental until it meets the target Nolan sets before T-0.
 
 ## Checks
 

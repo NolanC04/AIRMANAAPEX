@@ -12,7 +12,13 @@ export const env = {
   importSecret: process.env.APEX_IMPORT_SECRET ?? "",
   signetopsRawBase: process.env.SIGNETOPS_RAW_BASE ?? "https://raw.githubusercontent.com/NolanC04/SIGNETOPS/main",
   githubToken: process.env.GITHUB_TOKEN ?? "",
+  // Pin GENE's prompt to a SIGNETOPS commit for the pilot. "main" means the prompt can change mid-cohort.
+  genePromptRef: process.env.GENE_PROMPT_REF ?? "",
+  geneRubricVersion: process.env.GENE_RUBRIC_VERSION ?? "unversioned",
 };
+/** SIGNETOPS_RAW_BASE ends in a ref (default /main). GENE_PROMPT_REF, when set, replaces that ref. */
+export const genePromptRef = () => env.genePromptRef || env.signetopsRawBase.split("/").pop() || "main";
+export const genePromptBase = () => (env.genePromptRef ? env.signetopsRawBase.replace(/\/[^/]+$/, `/${env.genePromptRef}`) : env.signetopsRawBase);
 export const supabaseConfigured = () => Boolean(env.supabaseUrl && env.supabaseAnonKey && env.supabaseServiceKey);
 export const devStoreAllowed = () => process.env.NODE_ENV !== "production" || process.env.APEX_ALLOW_DEV_STORE === "1";
 export class ConfigError extends Error {

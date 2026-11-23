@@ -4,15 +4,20 @@ import { code, gap } from "@/lib/program";
 import type { FieldChange } from "@/lib/diff";
 import { Form, ActionButton } from "@/components/Form";
 import { ApproveProposal, BundleUpload } from "./Material";
+import { validationSummary, rubricWritten } from "@/lib/validation";
+import { env } from "@/lib/env";
 
 export default async function Admin() {
   const db = store();
-  const [mods, proposals, laws, s] = await Promise.all([
+  const [mods, proposals, laws, s, v] = await Promise.all([
     modules(),
     db.list<{ id: string; module_number: number; source: string; changes: FieldChange[]; status: string; at: string }>("import_proposals", { status: "pending" }, { column: "module_number" }),
     db.list<{ id: string; module_number: number; text: string; approved: boolean }>("closing_laws"),
     settings(),
+    validationSummary(),
   ]);
+  const pct = (x: number | null) => (x == null ? "—" : `${Math.round(x * 100)}%`);
+  const k = (x: number | null) => (x == null ? "—" : x.toFixed(2));
   return (
     <main className="page-wide" style={{ display: "grid", gap: 18 }}>
       <section className="card" style={{ display: "grid", gap: 10 }}>
@@ -50,6 +55,23 @@ export default async function Admin() {
           { name: "text", label: "Closing Law (verbatim)", type: "textarea", required: true },
           { name: "attest", label: "I, Nolan, wrote this Closing Law myself.", type: "checkbox", required: true },
         ]} />
+      </section>
+      <section className="card" style={{ display: "grid", gap: 10 }}>
+        <span className="k">GENE VALIDATION · EXPERIMENTAL UNTIL THE TARGET IS MET</span>
+        <table className="table"><tbody>
+          <tr><td>GENE reads filed</td><td>{v.reads} ({v.firstReads} first reads)</td></tr>
+          <tr><td>First reads with a human score</td><td>{v.scoredReads} · raters: {v.raters}</td></tr>
+          <tr><td>GENE vs human, quadratic weighted kappa</td><td><b>{k(v.qwk)}</b> · exact {pct(v.exact)} · within one {pct(v.adjacent)}</td></tr>
+          <tr><td>Human vs human (ceiling)</td><td>{k(v.humanQwk)} on {v.humanPairs} double-scored reads</td></tr>
+          <tr><td>Target (set before T-0)</td><td>{s.gene_kappa_target ?? <span className="gap">[NOLAN: set target]</span>}</td></tr>
+          <tr><td>Average tokens per read</td><td>{v.avgTokens ? `${Math.round(v.avgTokens.in)} in / ${Math.round(v.avgTokens.out)} out` : "—"} <span className="help">(multiply by current model prices for cost per assessment)</span></td></tr>
+          <tr><td>Versions in use</td><td>{v.versions.length ? v.versions.map((x) => <div key={x}>{x}</div>) : "—"}{v.versions.length > 1 && <div className="err">More than one version: scores across versions aren&apos;t comparable.</div>}</td></tr>
+          <tr><td>Prompt pinned</td><td>{env.genePromptRef ? env.genePromptRef : <span className="err">No. GENE_PROMPT_REF is unset, so the prompt follows SIGNETOPS main.</span>}</td></tr>
+        </tbody></table>
+        <Form endpoint="/api/settings" reload submit="Save target" fields={[{ name: "gene_kappa_target", label: "Agreement target (0–1)", type: "number", value: s.gene_kappa_target == null ? "" : String(s.gene_kappa_target) }]} />
+        <p style={{ margin: 0 }}>Rater review: <b>{s.rater_review_enabled ? "Open" : "Closed"}</b>{!rubricWritten() && <span className="gap"> [NOLAN: write the rubric anchors first]</span>}</p>
+        <p className="help" style={{ margin: 0 }}>Before opening: the onboarding agreement must tell learners that trained raters may read their reflections without names. <span className="gap">[NOLAN: agreement wording]</span></p>
+        <ActionButton ghost endpoint="/api/settings" body={{ rater_review_enabled: !s.rater_review_enabled }} label={s.rater_review_enabled ? "Close rater review" : "Open rater review"} />
       </section>
       <section className="card" style={{ display: "grid", gap: 10 }}>
         <span className="k">SETTINGS</span>

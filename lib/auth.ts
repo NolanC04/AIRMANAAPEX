@@ -6,7 +6,7 @@ import { env, supabaseConfigured, devStoreAllowed } from "./env";
 import { store } from "./store";
 import { supabaseSession } from "./supabase-server";
 
-export type Role = "learner" | "assistant" | "facilitator" | "admin" | "comparison";
+export type Role = "learner" | "assistant" | "facilitator" | "admin" | "comparison" | "rater";
 export interface Profile {
   id: string;
   email: string;
@@ -77,11 +77,13 @@ export async function currentProfile(): Promise<Profile | null> {
 export const canFacilitate = (p: Profile | null) => p?.role === "facilitator" || p?.role === "admin";
 export const isAdmin = (p: Profile | null) => p?.role === "admin";
 
+export const homeOf = (role: Role) => (role === "facilitator" || role === "admin" ? "/facilitator" : role === "rater" ? "/rate" : "/app");
+
 /** Page guard. Learners never reach facilitator or admin pages. */
 export async function requireRole(roles: Role[]): Promise<Profile> {
   const p = await currentProfile();
   if (!p) redirect("/");
-  if (!roles.includes(p.role)) redirect(p.role === "facilitator" || p.role === "admin" ? "/facilitator" : "/app");
+  if (!roles.includes(p.role)) redirect(homeOf(p.role));
   return p;
 }
 

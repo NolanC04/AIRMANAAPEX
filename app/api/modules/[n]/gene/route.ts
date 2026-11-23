@@ -28,8 +28,9 @@ export async function POST(req: Request, { params }: { params: Promise<{ n: stri
       return ok({ gene, crisis: true });
     }
     const asked = gene.length;
-    const read = await geneRead({
-      reflectPrompt: m.content.reflect_prompt ?? "",
+    const reflectPrompt = m.content.reflect_prompt ?? "";
+    const { read, meta } = await geneRead({
+      reflectPrompt,
       answer: e.remix || e.bridge!,
       history: gene.filter((g) => g.a != null).map((g) => ({ q: g.q, a: g.a! })),
       last: asked >= MAX_GENE_QUESTIONS,
@@ -37,6 +38,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ n: stri
     // closing sentence is stored with a = "" so no further answer is requested
     gene.push({ q: read.follow_up_question, a: asked >= MAX_GENE_QUESTIONS ? "" : null });
     await db.update("module_entries", { id: e.id }, { gene });
+    // Validation record: what GENE read, what it said, and exactly what produced it (V3 report, Section 9).
+    await db.insert("gene_reads", { entry_id: e.id, user_id: p.id, module_number: n, turn: asked, reflect_prompt: reflectPrompt, answer: asked === 0 ? e.remix || e.bridge! : answer, reasoning_grade: read.reasoning_grade, thinking_pattern: read.thinking_pattern, follow_up_question: read.follow_up_question, ...meta, at: new Date().toISOString() });
     await db.insert("observations", { user_id: p.id, module_number: n, text: read.thinking_pattern, grade: read.reasoning_grade, rating: null, rated_at: null, surfaced: false, at: new Date().toISOString() });
     if (read.flag) await db.insert("safety_flags", { user_id: p.id, anon_id: p.anon_id, module_number: n, source: "model", raised_at: new Date().toISOString(), followed_up_at: null, followed_up_by: null });
     return ok({ gene, crisis: read.flag });

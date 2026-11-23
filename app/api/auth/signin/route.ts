@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { devAuth, devSignIn, currentProfile } from "@/lib/auth";
+import { devAuth, devSignIn, currentProfile, homeOf } from "@/lib/auth";
 import { supabaseSession } from "@/lib/supabase-server";
 import { store } from "@/lib/store";
 import { env } from "@/lib/env";
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       await devSignIn(email);
       const p = await currentProfile();
       if (!p) return bad("That account isn't set up yet. Ask your facilitator for an invite code.", 403);
-      return ok({ redirect: p.role === "admin" || p.role === "facilitator" ? "/facilitator" : "/app" });
+      return ok({ redirect: homeOf(p.role) });
     }
     const { error } = await (await supabaseSession()).auth.signInWithOtp({ email, options: { emailRedirectTo: `${env.siteUrl}/auth/callback` } });
     if (error) throw new Error(error.message);
