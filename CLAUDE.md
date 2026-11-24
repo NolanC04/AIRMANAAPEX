@@ -4,6 +4,8 @@ Read `.github/copilot-instructions.md`, then `.github/instructions/design.instru
 
 ## Standing rules
 
+- Not unit tooling: no feedback campaigns, flight blocks, unit reports or leadership briefings. Those live in NolanC04/UNITTOOLS. Official duty training never uses this app.
+
 - Own code, no Base44. Next.js + Supabase + Vercel; Claude API only for GENE, server-side, through `lib/gene.ts`.
 - Preview first. Never merge to main or deploy production without Nolan's approval.
 - Privacy: feedback responses carry no user id (receipts are separate, dates only); reports hidden below 5 responses; notification emails carry no content.

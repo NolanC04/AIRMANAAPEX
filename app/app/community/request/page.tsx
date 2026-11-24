@@ -8,7 +8,7 @@ export default function Request() {
       <p className="card" style={{ margin: 0, fontWeight: 600 }}>{CRISIS}</p>
       <div className="card">
         <Form endpoint="/api/requests/new" submit="Send request" fields={[
-          { name: "kind", label: "What kind", type: "select", options: [["one_on_one", "One-on-one"], ["small_group", "Small group"], ["flight", "Whole flight"]] },
+          { name: "kind", label: "What kind", type: "select", options: [["one_on_one", "One-on-one"], ["small_group", "Small group"], ["team", "Team"]] },
           { name: "preferred_times", label: "Times that work", required: true, help: "For example: weekday mornings after PT" },
           { name: "note", label: "Anything you want the facilitator to know (optional)", type: "textarea", help: "Only the facilitator and admin read this. Emails never include it." },
         ]} />

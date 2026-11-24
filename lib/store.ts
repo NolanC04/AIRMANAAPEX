@@ -9,9 +9,8 @@ import { seedData } from "./seed";
 
 export type TableName =
   | "profiles" | "invites" | "agreements" | "audit_log" | "settings"
-  | "feedback_forms" | "feedback_campaigns" | "feedback_responses" | "campaign_receipts" | "you_said_we_did"
   | "session_requests" | "request_messages"
-  | "tracks" | "events" | "rsvps" | "flight_blocks"
+  | "tracks" | "events" | "rsvps"
   | "modules" | "closing_laws" | "import_proposals"
   | "classes" | "class_members" | "class_sessions" | "class_joins"
   | "module_entries" | "observations" | "daily_reps" | "checkins" | "safety_flags"

@@ -21,7 +21,7 @@ Run one phase per request: "Execute Phase N in docs/build-phases.md." Each phase
 - Seed script creates one admin from an env email.
 - **Done when:** three test accounts land on three different home screens, and an Airman cannot load `/facilitator`.
 
-## Phase 2 — Feedback loop
+## Phase 2 — Feedback loop (MOVED to NolanC04/UNITTOOLS, 23 Nov 2026; do not build here)
 
 - Tables: `feedback_forms` (questions JSON), `feedback_campaigns` (form_id, unit, flight, sent_at, closes_at, status), `feedback_responses` (campaign_id, answers JSON, submitted_at — NO user_id), `campaign_receipts` (campaign_id, user_id, submitted bool) so a person can't submit twice while the response itself stays unlinked.
 - Facilitator: build a form (multiple choice, scale 1–5, short text), send to unit or flight, see status.
@@ -41,7 +41,7 @@ Run one phase per request: "Execute Phase N in docs/build-phases.md." Each phase
 - Crisis Line shown on the request screen.
 - **Done when:** a request travels Airman → admin email → reply in app → Airman email, with no personal content in either email.
 
-## Phase 4 — Tracks, events, Discord, flight blocks
+## Phase 4 — Tracks, events, Discord (flight blocks MOVED to NolanC04/UNITTOOLS)
 
 - Tables: `tracks` (seed the four), `events` (track_id, title, starts_at, location, description, capacity), `rsvps`, `flight_blocks` (unit, flight, month, topic, starts_at, facilitator_id, source_campaign_id).
 - Airman: tracks page, event list, RSVP. Discord button from `DISCORD_INVITE_URL`.

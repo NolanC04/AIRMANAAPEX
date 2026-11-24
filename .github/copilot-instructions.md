@@ -4,14 +4,14 @@ You are building Airman Apex for Nolan Langford, an active-duty Air Force Senior
 
 ## What Airman Apex is
 
-The MRT-facilitated program app for an Air Force unit. Offer line: "Hybrid intellects and hybrid athletes." It is the pilot program, military cohorts first. Its results later feed a separate civilian app (a separate repo). **AAPEX materials never mention The Vantage** — no byline, footer, email, export or module text. Context: First Term Airmen Center (FTAC) is being separated from the resiliency program, so MRTs are being pushed into units; this app is how resiliency gets organized and delivered inside the unit.
+A free, voluntary, off-duty formation program for Air Force members. Offer line: "Hybrid intellects and hybrid athletes." It is the pilot program, military cohorts first. Its results later feed a separate civilian app (a separate repo). **AAPEX materials never mention The Vantage** — no byline, footer, email, export or module text.
+
+**Not unit tooling.** Official resiliency training delivered as part of Nolan's duties never uses this app, its branding or its data (V3 report, Section 15). Unit feedback campaigns, flight blocks, "you said / we did" and leadership briefings were split out on 23 Nov 2026 into the separate NolanC04/UNITTOOLS repo. Do not add unit- or duty-scoped features here.
 
 One app, two halves:
 
-1. **Facilitation** — unit feedback loop, growth-session requests, tracks and events, Discord link, monthly flight blocks.
+1. **Facilitation** — growth-session requests (one-on-one, small group, team), tracks and events, Discord link.
 2. **Module walkthrough** — the 24-module AAPEX program, viewed one module at a time, unlocked only during class.
-
-Delivery model (three tiers): a monthly 45-minute resiliency block per flight during training week (topic chosen from feedback); on-request coaching (one-on-one, small group, whole flight); and Airman Apex itself as the immersive option.
 
 ## Stack (fixed)
 

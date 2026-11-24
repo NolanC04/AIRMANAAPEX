@@ -4,7 +4,7 @@ import { AppHeader } from "@/components/AppHeader";
 import { Footer } from "@/components/Footer";
 
 export const dynamic = "force-dynamic";
-const NAV = [["/facilitator", "Overview"], ["/facilitator/class", "Classes & room"], ["/facilitator/run", "Run sheets"], ["/facilitator/feedback", "Feedback"], ["/facilitator/outcomes", "Outcomes"], ["/facilitator/people", "People"]];
+const NAV = [["/facilitator", "Overview"], ["/facilitator/class", "Classes & room"], ["/facilitator/run", "Run sheets"], ["/facilitator/outcomes", "Outcomes"], ["/facilitator/people", "People"]];
 
 export default async function FacilitatorLayout({ children }: { children: React.ReactNode }) {
   const p = await requireRole(["facilitator", "admin"]);

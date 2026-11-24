@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { MEASURES, scoreOf, stat, effect, toCSV, type CheckinRow } from "../lib/measures.ts";
-import { reportVisible, aggregate, notificationEmail } from "../lib/privacy.ts";
+import { notificationEmail } from "../lib/privacy.ts";
 import { contentReadable, slideReadable, classCode } from "../lib/access.ts";
 import { safetyHit, shouldReflect, parseRead } from "../lib/gene-rules.ts";
 import { diff } from "../lib/diff.ts";
@@ -38,15 +38,8 @@ test("diff-in-diff and Cohen's d match a hand calculation", () => {
   assert.match(toCSV(rows).split("\n")[1], /^a,cohort,T0,15,,$/);
 });
 
-test("feedback report hidden at 4, visible at 5; aggregates carry no ids", () => {
-  assert.equal(reportVisible(4), false);
-  assert.equal(reportVisible(5), true);
-  const agg = aggregate([{ id: "q1", kind: "scale", prompt: "?" }], [{ answers: { q1: 4 } }, { answers: { q1: 2 } }]);
-  assert.equal(agg[0].mean, 3);
-});
-
 test("notification email never contains request content", () => {
-  const e = notificationEmail("https://x/app/unit/requests/1");
+  const e = notificationEmail("https://x/app/community/requests/1");
   assert.equal(e.subject, "You have a new message on Airman Apex");
   assert.ok(!/note|reason/i.test(e.text));
 });

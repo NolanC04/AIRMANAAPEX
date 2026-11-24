@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 const TABS = [
   { href: "/app", label: "Modules", d: "M4 5h7v7H4zM13 5h7v7h-7zM4 14h7v7H4zM13 14h7v7h-7z" },
-  { href: "/app/unit", label: "Unit", d: "M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" },
+  { href: "/app/community", label: "Community", d: "M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z" },
   { href: "/app/checkins", label: "Check-ins", d: "M5 12l4 4 10-10" },
   { href: "/app/almanac", label: "Almanac", d: "M5 4h10a4 4 0 014 4v12H9a4 4 0 01-4-4z" },
 ];

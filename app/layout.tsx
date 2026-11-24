@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "AAPEX", template: "%s · AAPEX" },
-  description: "The unit resiliency program app.",
+  description: "Hybrid intellects and hybrid athletes. A voluntary, off-duty formation program.",
   robots: { index: false },
 };
 export const viewport: Viewport = { themeColor: "#EEE7D8", width: "device-width", initialScale: 1 };

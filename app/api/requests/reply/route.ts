@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     await db.insert("request_messages", { request_id: r.id, author_id: p.id, author_role: p.id === r.user_id ? "learner" : "staff", body, at: new Date().toISOString() });
     const requester = await db.get<Profile>("profiles", { id: r.user_id });
     const to = p.id === r.user_id ? await staffEmails() : requester ? [requester.email] : [];
-    await notify(to, p.id === r.user_id ? `/facilitator/requests/${r.id}` : `/app/unit/requests/${r.id}`);
+    await notify(to, `/app/community/requests/${r.id}`);
     return ok();
   } catch (e) {
     return fail(e);

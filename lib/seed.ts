@@ -10,11 +10,6 @@ export function seedData() {
     agreements: [],
     audit_log: [],
     settings: [{ id: "settings", modules_readable_after_completion: false, daily_reps_between_sessions: true, report_threshold: 5, rater_review_enabled: false, gene_kappa_target: null }],
-    feedback_forms: [],
-    feedback_campaigns: [],
-    feedback_responses: [],
-    campaign_receipts: [],
-    you_said_we_did: [],
     session_requests: [],
     request_messages: [],
     tracks: [
@@ -27,7 +22,6 @@ export function seedData() {
       { id: "event-guardian-gauntlet", track_id: "track-social", title: "Guardian Gauntlet", starts_at: null, location: null, description: null, capacity: null, created_at: NOW },
     ],
     rsvps: [],
-    flight_blocks: [],
     modules: Array.from({ length: 24 }, (_, i) => ({
       id: `module-${i + 1}`,
       number: i + 1,
